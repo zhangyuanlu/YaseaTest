@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/bt_push"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="推流" />
+
+    <Button
+        android:id="@+id/bt_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_push"
+        android:layout_centerHorizontal="true"
+        android:text="拉流" />
+    <EditText
+        android:id="@+id/et_push1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/et_push2"
+        android:layout_centerHorizontal="true"
+        android:text="rtmp://192.168.0.103:1935/live/room1" />
+    <EditText
+        android:id="@+id/et_push2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_push"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="rtmp://192.168.0.103:1935/live/room2" />
+
+    <EditText
+        android:id="@+id/et_pull1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_pull"
+        android:layout_centerHorizontal="true"
+        android:text="rtmp://202.69.69.180:443/webcast/bshdlive-pc" />
+    <EditText
+        android:id="@+id/et_pull2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_pull1"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="rtmp://192.168.0.102:1935/live/room"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/et_push1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/radiobutton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/et_push"
+            android:layout_centerHorizontal="true"
+            android:text="前置" />
+
+        <RadioButton
+            android:id="@+id/radiobutton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/et_push"
+            android:layout_toStartOf="@+id/bt_push"
+            android:checked="true"
+            android:text="后置" />
+
+        <RadioButton
+            android:id="@+id/radiobutton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/et_push"
+            android:layout_toEndOf="@+id/bt_push"
+            android:text="双开" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/group_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal">
+        <RadioButton
+            android:id="@+id/single_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="单路"/>
+        <RadioButton
+            android:id="@+id/couple_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多路"/>
+    </RadioGroup>
+</RelativeLayout>
