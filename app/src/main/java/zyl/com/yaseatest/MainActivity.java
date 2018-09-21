@@ -38,7 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         group_play.setOnCheckedChangeListener(this);
         bt_push.setOnClickListener(this);
         bt_pull.setOnClickListener(this);
-
+        //test
+        Intent intent=new Intent(this,FrontCameraService.class);
+        startService(intent);
+        intent=new Intent(this,BackCameraService.class);
+        startService(intent);
     }
 
     @Override

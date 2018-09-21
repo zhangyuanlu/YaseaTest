@@ -27,7 +27,7 @@ public class PlayActivity extends Activity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_play);
-
+        /*
         type=getIntent().getIntExtra("type",type);
         url1=getIntent().getStringExtra("url1");
 
@@ -40,7 +40,18 @@ public class PlayActivity extends Activity{
             SurfaceView surfaceView2=findViewById(R.id.surfaceview2);
             surfaceView2.setVisibility(View.VISIBLE);
             initIjkPlayer(surfaceView2,url2);
-        }
+        }*/
+        initView();
+    }
+    private void initView(){
+        SurfaceView surfaceView1=findViewById(R.id.surfaceview1);
+        SurfaceView surfaceView2=findViewById(R.id.surfaceview2);
+        SurfaceView surfaceView3=findViewById(R.id.surfaceview3);
+        SurfaceView surfaceView4=findViewById(R.id.surfaceview4);
+        initIjkPlayer(surfaceView1,"rtmp://192.168.43.12:1935/live/room1");
+        initIjkPlayer(surfaceView2,"rtmp://192.168.43.12:1935/live/room2");
+        initIjkPlayer(surfaceView3,"rtmp://192.168.43.12:1935/live/room3");
+        initIjkPlayer(surfaceView4,"rtmp://192.168.43.12:1935/live/room4");
     }
     private void initIjkPlayer(SurfaceView surfaceView,String url){
         IjkMediaPlayer ijkMediaPlayer=new IjkMediaPlayer();

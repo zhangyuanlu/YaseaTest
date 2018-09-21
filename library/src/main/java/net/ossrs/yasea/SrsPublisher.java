@@ -1,8 +1,5 @@
 package net.ossrs.yasea;
 
-import android.graphics.ImageFormat;
-import android.graphics.Rect;
-import android.hardware.Camera;
 import android.media.AudioRecord;
 import android.media.audiofx.AcousticEchoCanceler;
 import android.media.audiofx.AutomaticGainControl;

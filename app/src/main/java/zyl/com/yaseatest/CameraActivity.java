@@ -1,8 +1,10 @@
 package zyl.com.yaseatest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,6 +24,7 @@ public class CameraActivity extends Activity implements RtmpHandler.RtmpListener
     private SrsCameraView srsCameraView1,srsCameraView2;
     private SrsPublisher mPublisher1,mPublisher2;
     private String url1,url2;
+    private PowerManager.WakeLock wakeLock=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +32,30 @@ public class CameraActivity extends Activity implements RtmpHandler.RtmpListener
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_camera);
 
+        keepScreenOn(true);
         initView();
         initPublisher();
     }
+    private void keepScreenOn(boolean on) {
+        if (on) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            if(wakeLock==null) {
+                wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP, "==KeepScreenOn==");
+            }
+            wakeLock.acquire();
 
+        } else {
+            if (wakeLock != null) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+        }
+    }
     private void initView(){
         srsCameraView1=findViewById(R.id.cameraview1);
         srsCameraView1.setCameraId(Camera.CameraInfo.CAMERA_FACING_BACK);
         srsCameraView2=findViewById(R.id.cameraview2);
-        srsCameraView2.setCameraId(Camera.CameraInfo.CAMERA_FACING_FRONT);
+    //    srsCameraView2.setCameraId(Camera.CameraInfo.CAMERA_FACING_FRONT);
     }
     private void initPublisher(){
         int type=getIntent().getIntExtra("type",MainActivity.TYPE_CAMERA_BACK);
@@ -92,13 +110,12 @@ public class CameraActivity extends Activity implements RtmpHandler.RtmpListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        keepScreenOn(false);
         if(mPublisher1!=null){
-            mPublisher1.stopRecord();
             mPublisher1.stopPublish();
             srsCameraView1.stopCamera();
         }
         if(mPublisher2!=null){
-            mPublisher2.stopRecord();
             mPublisher2.stopPublish();
             srsCameraView2.stopCamera();
         }

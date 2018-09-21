@@ -198,7 +198,7 @@ public class SrsCameraView extends GLSurfaceView implements GLSurfaceView.Render
     }
 
     public void setCameraId(int id) {
-        stopTorch();
+        //stopTorch();
         mCamId = id;
         setPreviewOrientation(mPreviewOrientation);
     }
@@ -328,7 +328,7 @@ public class SrsCameraView extends GLSurfaceView implements GLSurfaceView.Render
     public void stopCamera() {
         disableEncoding();
 
-        stopTorch();
+        //stopTorch();
         if (mCamera != null) {
             mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
