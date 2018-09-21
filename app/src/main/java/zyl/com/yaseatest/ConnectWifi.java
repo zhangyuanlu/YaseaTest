@@ -20,8 +20,8 @@ public class ConnectWifi extends IntentService {
     private static final String TAG="ConnectWifi";
     public static final String ACTION_POWER_ON="power_on";
     public static final String ACTION_POWER_OFF="power_off";
-    private static final String SSID="Apollo";
-    private static final String PWD="zhangyuanlu";
+    private static final String SSID="A15F";
+    private static final String PWD="1234qwer";
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -58,7 +58,7 @@ public class ConnectWifi extends IntentService {
      * 启动后摄开始推流
      */
     private void startPublisher(String ipAddress){
-        String URL1="rtmp://"+ipAddress+":1935/live/room1";
+        String URL1="rtmp://"+ipAddress+":1935/live/room4";
         Intent intent=new Intent(this,CameraActivity.class);
         intent.putExtra("url1",URL1);
         intent.putExtra("type",MainActivity.TYPE_CAMERA_BACK);

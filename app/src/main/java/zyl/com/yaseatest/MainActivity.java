@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_pull.setOnClickListener(this);
         //test
         Intent intent=new Intent(this,FrontCameraService.class);
-        startService(intent);
+     //   startService(intent);
         intent=new Intent(this,BackCameraService.class);
-        startService(intent);
+     //   startService(intent);
     }
 
     @Override

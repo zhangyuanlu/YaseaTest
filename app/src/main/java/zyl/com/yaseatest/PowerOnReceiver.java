@@ -23,7 +23,7 @@ public class PowerOnReceiver extends BroadcastReceiver {
             Intent service=new Intent(context,ConnectWifi.class);
             service.setAction(ConnectWifi.ACTION_POWER_ON);
             notifyPowerOn(context);
-         //   context.startService(service);
+            context.startService(service);
         }else if(action.equals("android.intent.action.ACTION_SHUTDOWN")){
 
         }
