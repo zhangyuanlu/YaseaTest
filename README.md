@@ -23,5 +23,7 @@
 
 rtmp服务器的配置建议直接搜索下载nginx-rtmp-win32-master，解压后即可使用
 
+另本项目暂时未做动态权限的适配
+
 # 基本流程
 监听广播（开机广播/网络变更）后启动ConnectWifi(IntentService适合执行一定的耗时操作)，根据配置的SSID和密码尝试连接到特定的wifi，成功连网后将参数传到相应的CameraActivity（后期改为直接启动两个进程服务），打开相机后即可自动进行推流
