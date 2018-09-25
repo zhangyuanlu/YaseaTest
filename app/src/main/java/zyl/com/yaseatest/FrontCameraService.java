@@ -23,13 +23,17 @@ import java.net.SocketException;
 
 public class FrontCameraService extends Service implements RtmpHandler.RtmpListener,
         SrsRecordHandler.SrsRecordListener, SrsEncodeHandler.SrsEncodeListener{
-    public FrontCameraService() {
-    }
+
+    private WindowManager windowManager;
+    private LinearLayout linearLayout;
 
     private SrsCameraView srsCameraView;
     private SrsPublisher mPublisher;
 
     private static final String URL="rtmp://192.168.0.105:1935/live/front";
+
+    public FrontCameraService() {
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -54,12 +58,15 @@ public class FrontCameraService extends Service implements RtmpHandler.RtmpListe
         if(mPublisher!=null){
             mPublisher.stopPublish();
             srsCameraView.stopCamera();
+            if(windowManager!=null&&linearLayout!=null){
+                windowManager.removeView(linearLayout);
+            }
         }
     }
 
     private void createFlotView(){
         WindowManager.LayoutParams layoutParams=new WindowManager.LayoutParams();
-        WindowManager windowManager=(WindowManager)getApplication().getSystemService(Context.WINDOW_SERVICE);
+        windowManager=(WindowManager)getApplication().getSystemService(Context.WINDOW_SERVICE);
         layoutParams.type=WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         layoutParams.format= PixelFormat.RGBA_8888;
         layoutParams.flags=WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
@@ -69,7 +76,7 @@ public class FrontCameraService extends Service implements RtmpHandler.RtmpListe
         layoutParams.width=600;
         layoutParams.height=600;
         LayoutInflater inflater=LayoutInflater.from(getApplicationContext());
-        LinearLayout linearLayout= (LinearLayout) inflater.inflate(R.layout.floatview_layout,null);
+        linearLayout= (LinearLayout) inflater.inflate(R.layout.floatview_layout,null);
         windowManager.addView(linearLayout,layoutParams);
         srsCameraView=linearLayout.findViewById(R.id.cameraview);
         srsCameraView.setCameraId(Camera.CameraInfo.CAMERA_FACING_FRONT);
