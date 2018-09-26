@@ -20,6 +20,7 @@ public class ConnectWifi extends IntentService {
     private static final String TAG="ConnectWifi";
     public static final String ACTION_POWER_ON="power_on";
     public static final String ACTION_POWER_OFF="power_off";
+    public static final String ACTION_READY_PUBLISHER="ReadyToPublisher";
     private static final String SSID="A15F";
     private static final String PWD="1234qwer";
 
@@ -47,10 +48,9 @@ public class ConnectWifi extends IntentService {
             if(isConnectedWifi(SSID)) {
                 String ipAddress=getIpAddress();
                 Log.e(TAG,"ipAddress="+ipAddress);
-                startPublisher(ipAddress);
             }
-        }else if(action.equals(ACTION_POWER_OFF)){
-
+        }else if(action.equals(ACTION_READY_PUBLISHER)){
+            startPublisher("192.168.43.12");
         }
     }
 
@@ -58,7 +58,7 @@ public class ConnectWifi extends IntentService {
      * 启动后摄开始推流
      */
     private void startPublisher(String ipAddress){
-        String URL1="rtmp://"+ipAddress+":1935/live/room4";
+        String URL1="rtmp://"+ipAddress+":1935/live/room11";
         Intent intent=new Intent(this,CameraActivity.class);
         intent.putExtra("url1",URL1);
         intent.putExtra("type",MainActivity.TYPE_CAMERA_BACK);
